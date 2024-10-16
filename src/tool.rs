@@ -1,3 +1,5 @@
+extern crate chrono;
+
 #[macro_export]
 macro_rules! log_info {
     ($($arg:tt)*) => {{
