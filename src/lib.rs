@@ -1,9 +1,9 @@
 pub use chrono::Local;
 pub use std::fmt::Write;
-pub use std::thread::current;
 #[macro_export]
 macro_rules! log_info {
     ($($arg:tt)*) => {{
+        use std::thread::current;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -17,6 +17,7 @@ macro_rules! log_info {
 #[macro_export]
 macro_rules! log_warn {
     ($($arg:tt)*) => {{
+        use std::thread::current;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -30,6 +31,7 @@ macro_rules! log_warn {
 #[macro_export]
 macro_rules! log_error {
     ($($arg:tt)*) => {{
+        use std::thread::current;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -43,6 +45,7 @@ macro_rules! log_error {
 #[macro_export]
 macro_rules! log_link {
     ($($arg:tt)*) => {{
+        use std::thread::current;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -56,6 +59,7 @@ macro_rules! log_link {
 #[macro_export]
 macro_rules! log_msg {
     ($($arg:tt)*) => {{
+        use std::thread::current;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
