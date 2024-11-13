@@ -7,9 +7,3 @@ edition = "2021"
 
 [dependencies]
 time = { version = "*", features = ["serde", "local-offset", "formatting"] }
-
-[features]
-time = ["time/serde", "time/local-offset", "time/formatting"]
-default = [
-    "time",
-]
