@@ -1,5 +1,7 @@
 mod tool;
 
+extern crate time;
+
 #[macro_export]
 macro_rules! log_info {
     ($($arg:tt)*) => {{
