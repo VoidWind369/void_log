@@ -6,7 +6,9 @@ macro_rules! log_info {
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
-        let now = time::OffsetDateTime::now_utc().to_string();
+
+        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -22,7 +24,9 @@ macro_rules! log_warn {
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
-        let now = time::OffsetDateTime::now_utc().to_string();
+
+        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -38,7 +42,9 @@ macro_rules! log_error {
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
-        let now = time::OffsetDateTime::now_utc().to_string();
+
+        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -54,7 +60,9 @@ macro_rules! log_link {
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
-        let now = time::OffsetDateTime::now_utc().to_string();
+
+        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -70,7 +78,9 @@ macro_rules! log_msg {
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
-        let now = time::OffsetDateTime::now_utc().to_string();
+
+        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
