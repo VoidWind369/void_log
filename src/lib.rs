@@ -1,3 +1,4 @@
+pub extern crate time;
 mod tool;
 
 #[test]
