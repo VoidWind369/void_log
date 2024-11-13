@@ -1,4 +1,3 @@
-pub extern crate time as void_time;
 mod tool;
 
 #[test]
