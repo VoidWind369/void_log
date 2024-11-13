@@ -1,11 +1,8 @@
 #[macro_export]
 macro_rules! log_info {
     ($($arg:tt)*) => {{
-        extern crate time as void_time;
-
         use std::fmt::Write;
         use std::thread::current;
-        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -22,11 +19,8 @@ macro_rules! log_info {
 #[macro_export]
 macro_rules! log_warn {
     ($($arg:tt)*) => {{
-        extern crate time as void_time;
-
         use std::fmt::Write;
         use std::thread::current;
-        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -43,11 +37,8 @@ macro_rules! log_warn {
 #[macro_export]
 macro_rules! log_error {
     ($($arg:tt)*) => {{
-        extern crate time as void_time;
-
         use std::fmt::Write;
         use std::thread::current;
-        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -64,11 +55,8 @@ macro_rules! log_error {
 #[macro_export]
 macro_rules! log_link {
     ($($arg:tt)*) => {{
-        extern crate time as void_time;
-
         use std::fmt::Write;
         use std::thread::current;
-        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -85,11 +73,8 @@ macro_rules! log_link {
 #[macro_export]
 macro_rules! log_msg {
     ($($arg:tt)*) => {{
-        extern crate time as void_time;
-
         use std::fmt::Write;
         use std::thread::current;
-        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
