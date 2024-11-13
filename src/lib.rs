@@ -7,7 +7,7 @@ macro_rules! log_info {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        pub use time::{format_description, OffsetDateTime};
+        pub use crate::time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -26,7 +26,7 @@ macro_rules! log_warn {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        pub use time::{format_description, OffsetDateTime};
+        pub use crate::time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -45,7 +45,7 @@ macro_rules! log_error {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        pub use time::{format_description, OffsetDateTime};
+        pub use crate::time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -64,7 +64,7 @@ macro_rules! log_link {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        pub use time::{format_description, OffsetDateTime};
+        pub use crate::time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
@@ -83,7 +83,7 @@ macro_rules! log_msg {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        pub use time::{format_description, OffsetDateTime};
+        pub use crate::time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
