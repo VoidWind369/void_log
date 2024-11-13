@@ -1,6 +1,6 @@
 mod tool;
 
-extern crate time;
+pub extern crate time;
 
 #[macro_export]
 macro_rules! log_info {
