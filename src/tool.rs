@@ -3,12 +3,13 @@ macro_rules! log_info {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
+        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -21,12 +22,13 @@ macro_rules! log_warn {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
+        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -39,12 +41,13 @@ macro_rules! log_error {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
+        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -57,12 +60,13 @@ macro_rules! log_link {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
+        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -75,12 +79,13 @@ macro_rules! log_msg {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
+        use void_time::{format_description, OffsetDateTime};
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = time::format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = time::OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
+        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
