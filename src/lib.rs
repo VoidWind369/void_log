@@ -1,6 +1,6 @@
 use crate::time::{Datetime, TimeZone};
 
-mod time;
+pub mod time;
 
 pub fn get_local() -> Datetime {
     Datetime::local(TimeZone::E08)
