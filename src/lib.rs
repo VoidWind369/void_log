@@ -1,17 +1,22 @@
-pub extern crate time;
+use crate::time::{Datetime, TimeZone};
+
+mod time;
+
+pub fn get_local() -> Datetime {
+    Datetime::local(TimeZone::E08)
+}
 
 #[macro_export]
 macro_rules! log_info {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        use $crate::time::{format_description, OffsetDateTime};
+        use $crate::time::*;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let now = Datetime::local(TimeZone::E08).to_string();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -24,13 +29,12 @@ macro_rules! log_warn {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        use $crate::time::{format_description, OffsetDateTime};
+        use $crate::time::*;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let now = Datetime::local(TimeZone::E08).to_string();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -43,13 +47,12 @@ macro_rules! log_error {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        use $crate::time::{format_description, OffsetDateTime};
+        use $crate::time::*;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let now = Datetime::local(TimeZone::E08).to_string();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -62,13 +65,12 @@ macro_rules! log_link {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        use $crate::time::{format_description, OffsetDateTime};
+        use $crate::time::*;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let now = Datetime::local(TimeZone::E08).to_string();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -81,13 +83,12 @@ macro_rules! log_msg {
     ($($arg:tt)*) => {{
         use std::fmt::Write;
         use std::thread::current;
-        use $crate::time::{format_description, OffsetDateTime};
+        use $crate::time::*;
 
         let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
         let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
 
-        let format = format_description::parse("[year]-[month]-[day] [hour]:[minute]:[second]").unwrap();
-        let now = OffsetDateTime::now_local().unwrap().format(&format).unwrap();
+        let now = Datetime::local(TimeZone::E08).to_string();
 
         let mut output = String::new();
         write!(&mut output, $($arg)*).unwrap();
@@ -97,6 +98,7 @@ macro_rules! log_msg {
 
 #[test]
 fn test() {
+    log_info!("{}", Datetime::local(TimeZone::E08).to_string());
     log_info!("Info");
     log_warn!("Warn");
     log_error!("Error");
