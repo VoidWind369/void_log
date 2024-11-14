@@ -98,7 +98,7 @@ macro_rules! log_msg {
 
 #[test]
 fn test() {
-    log_info!("{}", Datetime::local(TimeZone::E08).to_string());
+    log_info!("{}", Datetime::local(TimeZone::E08));
     log_info!("Info");
     log_warn!("Warn");
     log_error!("Error");
