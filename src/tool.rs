@@ -2,6 +2,24 @@ use std::fmt::Display;
 use std::ops::Add;
 use std::time::{Duration, SystemTime};
 
+#[macro_export]
+macro_rules! log {
+    ($state:expr, $($arg:tt)*) => {
+        use std::fmt::Write;
+        use std::thread::current;
+        use $crate::tool::{Datetime, TimeZone};
+
+        let th_id = format!("{:?}", current().id()).replace("ThreadId", "线程");
+        let th_name = &(current().name().unwrap().to_string() + "0")[0..5];
+
+        let now = Datetime::local(TimeZone::E08);
+
+        let mut output = String::new();
+        write!(&mut output, $($arg)*).unwrap();
+        println!("\x1b[36m{}{}\x1b[0m {} \x1b[{}\x1b[0m {}", th_name, &th_id, now, $state, output);
+    };
+}
+
 pub struct Datetime {
     year: u64,
     month: u64,
