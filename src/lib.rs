@@ -37,11 +37,19 @@ macro_rules! log_msg {
     }};
 }
 
+#[macro_export]
+macro_rules! log_debug {
+    ($($arg:tt)*) => {{
+        $crate::log!("0m[ 调试 ]", $($arg)*);
+    }};
+}
+
 #[test]
 fn test() {
-    log_info!("{}", Datetime::local(TimeZone::E08));
+    log_debug!("{}", Datetime::local(TimeZone::E08));
     log_warn!("Warn");
     log_error!("Error");
     log_link!("Link");
     log_msg!("Message");
+    log_debug!("Debug");
 }
