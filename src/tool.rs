@@ -84,10 +84,10 @@ impl Datetime {
                 dt.year += 1; //减去天数后年份增加
             }
 
-            let mut month = 1;
-            while dt.day >= days_in_month(dt.year, month) {
-                dt.day -= days_in_month(dt.year, month);
-                month += 1;
+            dt.month = 1;
+            while dt.day >= days_in_month(dt.year, dt.month) {
+                dt.day -= days_in_month(dt.year, dt.month);
+                dt.month += 1;
             }
         }
         dt
