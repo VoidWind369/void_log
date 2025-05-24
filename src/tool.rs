@@ -61,34 +61,36 @@ pub enum TimeZone {
 
 impl Datetime {
     pub fn local(time_zone: TimeZone) -> Self {
+        let mut dt = Self::default();
         let system_now = SystemTime::now();
         if let Ok(mut duration) = system_now.duration_since(std::time::UNIX_EPOCH) {
-            duration = duration.add(Duration::from_secs(3600 * <TimeZone as Into<u64>>::into(time_zone)));
-            let mut second = duration.as_secs();
+            duration = duration.add(Duration::from_secs(
+                3600 * <TimeZone as Into<u64>>::into(time_zone),
+            ));
+            dt.second = duration.as_secs();
 
-            let mut day = second / 86400; // 计算天数
-            second = second % 86400; // 计算余下秒数
+            dt.day = dt.second / 86400 + 1; // 计算天数
+            dt.second = dt.second % 86400; // 计算余下秒数
 
-            let hour = second / 3600; // 余下秒数计算小时数
-            second = second % 3600; // 计算余下秒数
+            dt.hour = dt.second / 3600; // 余下秒数计算小时数
+            dt.second = dt.second % 3600; // 计算余下秒数
 
-            let minute = second / 60; // 余下秒数计算分钟数
-            second = second % 60; //余下秒数
+            dt.minute = dt.second / 60; // 余下秒数计算分钟数
+            dt.second = dt.second % 60; //余下秒数
 
-            let mut year = 1970;
-            while day >= days_in_year(year) {
-                day -= days_in_year(year); // 剩余天数大于一年，减去当年天数
-                year += 1; //减去天数后年份增加
+            dt.year = 1970;
+            while dt.day >= days_in_year(dt.year) {
+                dt.day -= days_in_year(dt.year); // 剩余天数大于一年，减去当年天数
+                dt.year += 1; //减去天数后年份增加
             }
 
             let mut month = 1;
-            while day >= days_in_month(year, month) {
-                day -= days_in_month(year, month);
+            while dt.day >= days_in_month(dt.year, month) {
+                dt.day -= days_in_month(dt.year, month);
                 month += 1;
             }
-
-            Self { year, month, day, hour, minute, second }
-        } else { Default::default() }
+        }
+        dt
     }
 }
 
@@ -107,7 +109,11 @@ impl Default for Datetime {
 
 impl Display for Datetime {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:04}-{:02}-{:02} {:02}:{:02}:{:02}", self.year, self.month, self.day, self.hour, self.minute, self.second)
+        write!(
+            f,
+            "{:04}-{:02}-{:02} {:02}:{:02}:{:02}",
+            self.year, self.month, self.day, self.hour, self.minute, self.second
+        )
     }
 }
 
@@ -130,8 +136,14 @@ fn days_in_year(year: u64) -> u64 {
 fn days_in_month(year: u64, month: u64) -> u64 {
     match month {
         1 | 3 | 5 | 7 | 8 | 10 | 12 => 31, // 31天大月
-        4 | 6 | 9 | 11 => 30, // 30天小月
-        2 => if (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0) { 29 } else { 28 }, // 2月闰年计算
-        _ => 0, // 非法月份
+        4 | 6 | 9 | 11 => 30,              // 30天小月
+        2 => {
+            if (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0) {
+                29
+            } else {
+                28
+            }
+        } // 2月闰年计算
+        _ => 0,                            // 非法月份
     }
 }
