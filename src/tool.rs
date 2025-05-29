@@ -69,7 +69,7 @@ impl Datetime {
             ));
             dt.second = duration.as_secs();
 
-            dt.day = dt.second / 86400 + 1; // 计算天数
+            dt.day += dt.second / 86400; // 计算天数
             dt.second = dt.second % 86400; // 计算余下秒数
 
             dt.hour = dt.second / 3600; // 余下秒数计算小时数
@@ -77,14 +77,12 @@ impl Datetime {
 
             dt.minute = dt.second / 60; // 余下秒数计算分钟数
             dt.second = dt.second % 60; //余下秒数
-
-            dt.year = 1970;
+            
             while dt.day >= days_in_year(dt.year) {
                 dt.day -= days_in_year(dt.year); // 剩余天数大于一年，减去当年天数
                 dt.year += 1; //减去天数后年份增加
             }
-
-            dt.month = 1;
+            
             while dt.day >= days_in_month(dt.year, dt.month) {
                 dt.day -= days_in_month(dt.year, dt.month);
                 dt.month += 1;
